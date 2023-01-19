@@ -101,11 +101,14 @@ Up-Scale auf 3 Deployments (deklarativ)
 
 Applikation von außen erreichbar machen über Ingress (so etwas wie ein Reverse-Proxy)
 
-    kubectl expose deployment why-kubernetes --type=ClusterIP --target-port=5000 --port=80
+    # imperativ: kubectl expose deployment why-kubernetes --type=ClusterIP --target-port=5000 --port=80
+    kubectl apply -f kubernetes/service.yaml
     kubectl apply -f kubernetes/ingress.yaml
-    curl http://localhost:8081/
+    curl -L http://localhost:8081/
 
 ### Kubernetes ist ein selbstheilendes System
 
     watch kubectl get pods
     kubectl delete pod <eine-instanz-auswaehlen>
+
+Kontrollier wie automatisch ein neuer Pod gestartet wird
