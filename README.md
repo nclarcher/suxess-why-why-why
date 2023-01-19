@@ -107,6 +107,8 @@ Applikation von außen erreichbar machen über Ingress (so etwas wie ein Reverse
     kubectl apply -f kubernetes/service.yaml
     kubectl apply -f kubernetes/ingress.yaml
     curl -L http://localhost:8081/
+    # access logs der applikation anschauen
+    kubectl logs -l app=why-kubernetes -f
 
 ### Kubernetes ist ein selbstheilendes System
 
