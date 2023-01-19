@@ -74,6 +74,8 @@ Wordpress (inkl. Datenbank-Container)
 
 ## Warum Kubernetes
 
+Disclaimer: auch wenn in K8s eigentlich Pods die kleinste Einheit sind, sag ich hier der einfachheithalber Container dazu
+
 ### Container im Cluster starten, ohne zu sagen wo sie gestartet werden sollen
 
 Den obigen Container in einem K8s Cluster starten
