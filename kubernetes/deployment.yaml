@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: why-kubernetes
+  name: why-kubernetes
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: why-kubernetes
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: why-kubernetes
+    spec:
+      containers:
+      - image: ghcr.io/jkleinlercher/why-container
+        name: why-container
+        resources: {}

@@ -70,3 +70,42 @@ Wordpress (inkl. Datenbank-Container)
 
     # startet zwei container 
     docker-compose -f stack.yml up
+
+
+## Warum Kubernetes
+
+### Container im Cluster starten, ohne zu sagen wo sie gestartet werden sollen
+
+Den obigen Container in einem K8s Cluster starten
+
+    kubectl run why-kubernetes --name=ghcr.io/jkleinlercher/why-container
+
+Wichtig: obwohl der Cluster aus mehreren Nodes besteht, müssen wir nicht sagen wo der Container gestartet wird. Darum kümmert sich K8s.
+
+### Einfaches skalieren
+
+Gleich 10 Instanzen meiner Applikation starten (siehe replicas Attribut im deployment)
+
+    kubectl apply -f kubernetes/deployment.yaml
+
+Down-Scale auf 2 Deployments (imperativ)
+
+    kubectl scale deployment why-kubernetes --replicas=2
+
+Up-Scale auf 3 Deployments (deklarativ)
+
+    # Anpassen des deployment.yaml
+    kubectl apply -f kubernetes/deployment.yaml
+
+### Applikation von außen erreichbar machen und Requests auf alle Instanzen verteilen
+
+Applikation von außen erreichbar machen über Ingress (so etwas wie ein Reverse-Proxy)
+
+    kubectl expose deployment why-kubernetes --type=ClusterIP --target-port=5000 --port=80
+    kubectl apply -f kubernetes/ingress.yaml
+    curl http://localhost:8081/
+
+### Kubernetes ist ein selbstheilendes System
+
+    watch kubectl get pods
+    kubectl delete pod <eine-instanz-auswaehlen>
