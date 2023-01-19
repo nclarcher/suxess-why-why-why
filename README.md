@@ -1,14 +1,12 @@
 # suxess-why-why-why
 
-## Warum container
-
-### All-in-one-Packages inkl. aller notwendigen Dependencies erstellen, veroeffentlichen und wiederverwenden
+## Warum Container
 
 Ausgangslage:
 
-Wir haben eine Python-Webapplikation geschrieben, die wir gerne vertreiben wollen.
+Wir (oder ChatGPT) haben eine Python-Webapplikation geschrieben, die wir gerne vertreiben wollen.
 
-Dieses Python-Projekt direkt am Rechner ausführen führt möglicherweise zu folgendem Problem:
+Dieses Python-Projekt direkt am Rechner ausführen, führt möglicherweise zu folgendem Problem:
 
     python3 app.py
     Traceback (most recent call last):
@@ -16,7 +14,12 @@ Dieses Python-Projekt direkt am Rechner ausführen führt möglicherweise zu fol
         from flask import Flask, render_template, request, session, redirect, url_for
     ModuleNotFoundError: No module named 'flask'
 
-Im `Dockerfile` wird beschrieben, was alles im Container enthalten sein soll und welches Programm er ausführen soll.
+Das zeigt schon eines der Probleme mit traditionellen Applikationen:
+    - das Management aller Dependencies um die Applikation herum
+    - wie die Software gestartet / gestoppt / gemanaged wird ist je nach Software unterschiedlich
+
+Lösung: Im `Dockerfile` wird beschrieben, was alles für die Applikation benötigt wird und wie die Software gestartet werden muss.
+Das Bauen, Bereitstellen und Starten/Stoppen ist dann für jeden Container gleich, ganz unabhängig welche Software sich im Container befindet.
 
 Container Image bauen
 
@@ -51,6 +54,11 @@ Zusatzcommands
     docker buildx use mybuilder
     docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v8 -t ghcr.io/jkleinlercher/why-container:latest . --push
 
+### Mehrere Instanzen starten
+
+    docker run -d --name webserver-1 -p 81:5000 ghcr.io/jkleinlercher/why-container
+    docker run -d --name webserver-2 -p 82:5000 ghcr.io/jkleinlercher/why-container
+    docker run -d --name webserver-3 -p 83:5000 ghcr.io/jkleinlercher/why-container
 
 ### Third-Party Software verwenden
 
