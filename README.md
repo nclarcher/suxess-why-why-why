@@ -103,12 +103,19 @@ Up-Scale auf 3 Deployments (deklarativ)
 
 Applikation von außen erreichbar machen über Ingress (so etwas wie ein Reverse-Proxy)
 
+    # LoadBalancer vor unsere 3 Container-Instanzen definieren
     # imperativ: kubectl expose deployment why-kubernetes --type=ClusterIP --target-port=5000 --port=80
     kubectl apply -f kubernetes/service.yaml
+    
+    # Reverse-Proxy vor den LoadBalancer definieren
     kubectl apply -f kubernetes/ingress.yaml
+    
     curl -L http://localhost:8081/
+    
     # access logs der applikation anschauen
     kubectl logs -l app=why-kubernetes -f
+
+Reverse-Proxies, LoadBalancer, Server-Instanzen, Firewall-Regeln ... K8s ist ein Software-Defined-Datacenter!
 
 ### Kubernetes ist ein selbstheilendes System
 
