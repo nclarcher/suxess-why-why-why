@@ -6,7 +6,7 @@ metadata:
     app: why-kubernetes
   name: why-kubernetes
 spec:
-  replicas: 3
+  replicas: 10
   selector:
     matchLabels:
       app: why-kubernetes

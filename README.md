@@ -80,7 +80,7 @@ Disclaimer: auch wenn in K8s eigentlich Pods die kleinste Einheit sind, sag ich 
 
 Den obigen Container in einem K8s Cluster starten
 
-    kubectl run why-kubernetes --name=ghcr.io/jkleinlercher/why-container
+    kubectl run why-kubernetes --image=ghcr.io/jkleinlercher/why-container
 
 Wichtig: obwohl der Cluster aus mehreren Nodes besteht, müssen wir nicht sagen wo der Container gestartet wird. Darum kümmert sich K8s.
 
