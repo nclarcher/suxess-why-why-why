@@ -4,7 +4,6 @@ metadata:
   labels:
     app: why-kubernetes
   name: why-kubernetes
-  namespace: default
 spec:
   type: ClusterIP
   ports:
